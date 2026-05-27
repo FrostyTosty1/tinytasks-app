@@ -8,12 +8,13 @@ from sqlalchemy import create_engine
 
 from alembic import context
 
-# --- Make sure src/ is importable (so Alembic can see our models) ---
+# --- Make sure the backend package is importable for Alembic ---
 BASE_DIR = Path(__file__).resolve().parents[1]
-SRC_DIR = BASE_DIR / "src"
-if str(SRC_DIR) not in sys.path:
-    sys.path.insert(0, str(SRC_DIR))
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
+# Import models so SQLAlchemy registers them in Base.metadata for Alembic autogenerate.
+from src import models  # noqa: F401, E402
 from src.config import get_database_url  # noqa: E402
 from src.db import Base  # noqa: E402
 
