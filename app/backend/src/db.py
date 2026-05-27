@@ -56,6 +56,9 @@ def get_db() -> Session:
     db: Session = get_session_local()()
     try:
         yield db
+    except Exception:
+        db.rollback()
+        raise
     finally:
         db.close()
 
