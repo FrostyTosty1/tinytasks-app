@@ -30,11 +30,19 @@ It includes a FastAPI backend, React frontend, Docker-based local environment, a
 - REST semantics
 - normalized Prometheus route labels (no high cardinality)
 
+### CI/CD
+
+- GitHub Actions pipeline for backend tests and frontend build.
+- Backend test coverage report generated with pytest-cov.
+- Backend linting and formatting checks with Ruff.
+- Frontend linting and production build checks.
+- Docker image build jobs for backend and frontend.
+- Docker Hub publishing for backend and frontend images on pushes to `main`.
+
 ---
 
 ## Not implemented yet
 
-- CI pipeline (GitHub Actions)
 - Kubernetes / Helm
 - ArgoCD / GitOps
 - Terraform / Ansible
@@ -67,16 +75,19 @@ It includes a FastAPI backend, React frontend, Docker-based local environment, a
 ---
 
 ## Project structure
+
+```text
 ├── app
-│ ├── backend
-│ │ ├── alembic
-│ │ ├── src
-│ │ ├── tests
-│ │ └── Dockerfile
-│ └── frontend
-│ ├── src
-│ ├── Dockerfile
-│ └── nginx.conf
+│   ├── backend
+│   │   ├── alembic
+│   │   ├── src
+│   │   ├── tests
+│   │   └── Dockerfile
+│   └── frontend
+│       ├── src
+│       ├── Dockerfile
+│       └── nginx.conf
 ├── docker-compose.yml
 └── .env.example
+```
 

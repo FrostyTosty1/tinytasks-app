@@ -1,24 +1,49 @@
-# Python virtual environments
-/app/backend/venv
-/app/backend/.venv
-
-# Python cache files
-__pycache__/
-*.pyc
-
-# Alembic logs
-/app/backend/alembic/*.log
-
 # Environment files
 .env
+.env.*
+!.env.example
 
-# Frontend cache/build artifacts
-/app/frontend/.vite
-/app/frontend/dist
+# Python virtual environments
+.venv/
+venv/
+env/
 
-# Local SQLite DB for dev only
-# Remove later if no longer needed
-/app/backend/tinytasks.db
+# Python cache / bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Alembic logs
+app/backend/alembic/*.log
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+app/backend/tinytasks.db
+
+# Frontend dependencies / cache / build artifacts
+node_modules/
+dist/
+.vite/
+
+# Logs
+*.log
 
 # Editor settings
 .vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
