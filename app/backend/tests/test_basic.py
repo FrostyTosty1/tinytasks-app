@@ -54,6 +54,31 @@ def test_metrics_endpoint(client):
     assert "http_requests_total" in response.text
 
 
+def test_metrics_use_normalized_route_labels(client):
+    # Create a task so we can call a dynamic route with a real UUID.
+    created_response = client.post("/api/tasks", json={"title": "Metric route test"})
+    assert created_response.status_code == 201
+
+    task_id = created_response.json()["id"]
+
+    # Call the endpoint that uses a path parameter: /api/tasks/{task_id}.
+    # The real request URL contains a UUID, but Prometheus labels must use
+    # the normalized FastAPI route template instead of the raw URL.
+    response = client.get(f"/api/tasks/{task_id}")
+    assert response.status_code == 200
+
+    # Fetch Prometheus metrics after the dynamic route was called.
+    metrics_response = client.get("/metrics")
+    assert metrics_response.status_code == 200
+
+    # The metrics output should contain the normalized route template.
+    assert "/api/tasks/{task_id}" in metrics_response.text
+
+    # The concrete UUID must not appear in metrics labels, otherwise every task
+    # would create a separate Prometheus time series and cause high cardinality.
+    assert task_id not in metrics_response.text
+
+
 def test_create_task_success(client):
     # Send valid payload to create a new task
     payload = {"title": "Buy milk"}

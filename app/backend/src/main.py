@@ -47,15 +47,15 @@ async def prometheus_middleware(request: Request, call_next):
     method = request.method
     status_code = 500
 
-    route = request.scope.get("route")
-    path = route.path if route and hasattr(route, "path") else request.url.path
-
     try:
         response = await call_next(request)
         status_code = response.status_code
         return response
     finally:
         duration = perf_counter() - start
+
+        route = request.scope.get("route")
+        path = route.path if route and hasattr(route, "path") else request.url.path
 
         REQUEST_COUNT.labels(
             method=method,
