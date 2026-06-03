@@ -1,6 +1,22 @@
-node_modules
-dist
-.git
-.gitignore
-.vite
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Vite cache
+.vite/
+
+# Test / coverage artifacts
+coverage/
+.nyc_output/
+
+# Tool caches
+.eslintcache
+
+# OS files
 .DS_Store
+
+# VCS
+.git/
+.gitignore
