@@ -55,7 +55,7 @@ async def prometheus_middleware(request: Request, call_next):
         duration = perf_counter() - start
 
         route = request.scope.get("route")
-        path = route.path if route and hasattr(route, "path") else request.url.path
+        path = route.path if route and hasattr(route, "path") else "UNMATCHED"
 
         REQUEST_COUNT.labels(
             method=method,

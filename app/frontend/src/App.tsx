@@ -350,6 +350,7 @@ export default function App() {
             placeholder="New task title"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
+            maxLength={140}
             className="flex-1 rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:placeholder-gray-400"
           />
           <button
@@ -425,6 +426,7 @@ export default function App() {
                         autoFocus
                         value={editingTitle}
                         onChange={(e) => setEditingTitle(e.target.value)}
+                        maxLength={140}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") saveEdit(t);
                           if (e.key === "Escape") cancelEdit();

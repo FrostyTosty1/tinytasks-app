@@ -5,13 +5,25 @@ __pycache__/
 
 # Virtualenv
 venv/
+.venv/
+env/
 
-# Local SQLite (we will use Postgres in compose)
+# Local SQLite
 tinytasks.db
+*.db
+*.sqlite
+*.sqlite3
 
-# Tests cache
+# Test / coverage artifacts
 .pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Tool caches
+.ruff_cache/
+.mypy_cache/
 
 # VCS
-.git
+.git/
 .gitignore
